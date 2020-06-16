@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "paintings",
+  "info": {
+    "name": "painting"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "published": {
+      "type": "date"
+    },
+    "sold": {
+      "type": "boolean"
+    },
+    "photo": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}
