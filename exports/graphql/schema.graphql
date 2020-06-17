@@ -84,6 +84,7 @@ input editPaintingInput {
   published: Date
   sold: Boolean
   photo: [ID]
+  price: Float
 }
 
 input editRoleInput {
@@ -135,7 +136,7 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Painting | PaintingConnection | PaintingAggregator | PaintingGroupBy | PaintingConnectionId | PaintingConnectionCreated_at | PaintingConnectionUpdated_at | PaintingConnectionTitle | PaintingConnectionDescription | PaintingConnectionPublished | PaintingConnectionSold | createPaintingPayload | updatePaintingPayload | deletePaintingPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Painting | PaintingConnection | PaintingAggregator | PaintingAggregatorSum | PaintingAggregatorAvg | PaintingAggregatorMin | PaintingAggregatorMax | PaintingGroupBy | PaintingConnectionId | PaintingConnectionCreated_at | PaintingConnectionUpdated_at | PaintingConnectionTitle | PaintingConnectionDescription | PaintingConnectionPublished | PaintingConnectionSold | PaintingConnectionPrice | createPaintingPayload | updatePaintingPayload | deletePaintingPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
   createPainting(input: createPaintingInput): createPaintingPayload
@@ -176,12 +177,33 @@ type Painting {
   description: String
   published: Date
   sold: Boolean
+  price: Float
   photo(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
 }
 
 type PaintingAggregator {
   count: Int
   totalCount: Int
+  sum: PaintingAggregatorSum
+  avg: PaintingAggregatorAvg
+  min: PaintingAggregatorMin
+  max: PaintingAggregatorMax
+}
+
+type PaintingAggregatorAvg {
+  price: Float
+}
+
+type PaintingAggregatorMax {
+  price: Float
+}
+
+type PaintingAggregatorMin {
+  price: Float
+}
+
+type PaintingAggregatorSum {
+  price: Float
 }
 
 type PaintingConnection {
@@ -202,6 +224,11 @@ type PaintingConnectionDescription {
 
 type PaintingConnectionId {
   key: ID
+  connection: PaintingConnection
+}
+
+type PaintingConnectionPrice {
+  key: Float
   connection: PaintingConnection
 }
 
@@ -233,6 +260,7 @@ type PaintingGroupBy {
   description: [PaintingConnectionDescription]
   published: [PaintingConnectionPublished]
   sold: [PaintingConnectionSold]
+  price: [PaintingConnectionPrice]
 }
 
 input PaintingInput {
@@ -241,6 +269,7 @@ input PaintingInput {
   published: Date
   sold: Boolean
   photo: [ID]
+  price: Float
 }
 
 type Query {

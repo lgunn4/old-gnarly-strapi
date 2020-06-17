@@ -19,7 +19,8 @@
       "type": "date"
     },
     "sold": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "photo": {
       "collection": "file",
@@ -31,6 +32,9 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "price": {
+      "type": "decimal"
     }
   }
 }
