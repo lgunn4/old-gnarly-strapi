@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "configurations",
+  "info": {
+    "name": "Configuration"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "websiteName": {
+      "type": "string"
+    },
+    "websiteDescription": {
+      "type": "text"
+    },
+    "profilePicture": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "websiteLogo": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

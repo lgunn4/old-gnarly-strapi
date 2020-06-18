@@ -1,3 +1,84 @@
+type Configuration {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  websiteName: String
+  websiteDescription: String
+  profilePicture: UploadFile
+  websiteLogo: UploadFile
+}
+
+type ConfigurationAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ConfigurationConnection {
+  values: [Configuration]
+  groupBy: ConfigurationGroupBy
+  aggregate: ConfigurationAggregator
+}
+
+type ConfigurationConnectionCreated_at {
+  key: DateTime
+  connection: ConfigurationConnection
+}
+
+type ConfigurationConnectionId {
+  key: ID
+  connection: ConfigurationConnection
+}
+
+type ConfigurationConnectionProfilePicture {
+  key: ID
+  connection: ConfigurationConnection
+}
+
+type ConfigurationConnectionUpdated_at {
+  key: DateTime
+  connection: ConfigurationConnection
+}
+
+type ConfigurationConnectionWebsiteDescription {
+  key: String
+  connection: ConfigurationConnection
+}
+
+type ConfigurationConnectionWebsiteLogo {
+  key: ID
+  connection: ConfigurationConnection
+}
+
+type ConfigurationConnectionWebsiteName {
+  key: String
+  connection: ConfigurationConnection
+}
+
+type ConfigurationGroupBy {
+  id: [ConfigurationConnectionId]
+  created_at: [ConfigurationConnectionCreated_at]
+  updated_at: [ConfigurationConnectionUpdated_at]
+  websiteName: [ConfigurationConnectionWebsiteName]
+  websiteDescription: [ConfigurationConnectionWebsiteDescription]
+  profilePicture: [ConfigurationConnectionProfilePicture]
+  websiteLogo: [ConfigurationConnectionWebsiteLogo]
+}
+
+input ConfigurationInput {
+  websiteName: String
+  websiteDescription: String
+  profilePicture: ID
+  websiteLogo: ID
+}
+
+input createConfigurationInput {
+  data: ConfigurationInput
+}
+
+type createConfigurationPayload {
+  configuration: Configuration
+}
+
 input createPaintingInput {
   data: PaintingInput
 }
@@ -36,6 +117,14 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
 """
 scalar DateTime
 
+input deleteConfigurationInput {
+  where: InputID
+}
+
+type deleteConfigurationPayload {
+  configuration: Configuration
+}
+
 input deletePaintingInput {
   where: InputID
 }
@@ -58,6 +147,13 @@ input deleteUserInput {
 
 type deleteUserPayload {
   user: UsersPermissionsUser
+}
+
+input editConfigurationInput {
+  websiteName: String
+  websiteDescription: String
+  profilePicture: ID
+  websiteLogo: ID
 }
 
 input editFileInput {
@@ -136,9 +232,12 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Painting | PaintingConnection | PaintingAggregator | PaintingAggregatorSum | PaintingAggregatorAvg | PaintingAggregatorMin | PaintingAggregatorMax | PaintingGroupBy | PaintingConnectionId | PaintingConnectionCreated_at | PaintingConnectionUpdated_at | PaintingConnectionTitle | PaintingConnectionDescription | PaintingConnectionPublished | PaintingConnectionSold | PaintingConnectionPrice | createPaintingPayload | updatePaintingPayload | deletePaintingPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Configuration | ConfigurationConnection | ConfigurationAggregator | ConfigurationGroupBy | ConfigurationConnectionId | ConfigurationConnectionCreated_at | ConfigurationConnectionUpdated_at | ConfigurationConnectionWebsiteName | ConfigurationConnectionWebsiteDescription | ConfigurationConnectionProfilePicture | ConfigurationConnectionWebsiteLogo | createConfigurationPayload | updateConfigurationPayload | deleteConfigurationPayload | Painting | PaintingConnection | PaintingAggregator | PaintingAggregatorSum | PaintingAggregatorAvg | PaintingAggregatorMin | PaintingAggregatorMax | PaintingGroupBy | PaintingConnectionId | PaintingConnectionCreated_at | PaintingConnectionUpdated_at | PaintingConnectionTitle | PaintingConnectionDescription | PaintingConnectionPublished | PaintingConnectionSold | PaintingConnectionPrice | createPaintingPayload | updatePaintingPayload | deletePaintingPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
+  createConfiguration(input: createConfigurationInput): createConfigurationPayload
+  updateConfiguration(input: updateConfigurationInput): updateConfigurationPayload
+  deleteConfiguration(input: deleteConfigurationInput): deleteConfigurationPayload
   createPainting(input: createPaintingInput): createPaintingPayload
   updatePainting(input: updatePaintingInput): updatePaintingPayload
   deletePainting(input: deletePaintingInput): deletePaintingPayload
@@ -273,6 +372,9 @@ input PaintingInput {
 }
 
 type Query {
+  configuration(id: ID!): Configuration
+  configurations(sort: String, limit: Int, start: Int, where: JSON): [Configuration]
+  configurationsConnection(sort: String, limit: Int, start: Int, where: JSON): ConfigurationConnection
   painting(id: ID!): Painting
   paintings(sort: String, limit: Int, start: Int, where: JSON): [Painting]
   paintingsConnection(sort: String, limit: Int, start: Int, where: JSON): PaintingConnection
@@ -301,6 +403,15 @@ input RoleInput {
 
 """A time string with format: HH:mm:ss.SSS"""
 scalar Time
+
+input updateConfigurationInput {
+  where: InputID
+  data: editConfigurationInput
+}
+
+type updateConfigurationPayload {
+  configuration: Configuration
+}
 
 input updatePaintingInput {
   where: InputID
