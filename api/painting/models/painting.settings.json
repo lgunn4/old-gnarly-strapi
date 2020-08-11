@@ -35,6 +35,10 @@
     },
     "price": {
       "type": "decimal"
+    },
+    "pinned": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
