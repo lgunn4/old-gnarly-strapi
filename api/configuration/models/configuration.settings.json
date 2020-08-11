@@ -12,9 +12,6 @@
     "websiteName": {
       "type": "string"
     },
-    "websiteDescription": {
-      "type": "text"
-    },
     "profilePicture": {
       "model": "file",
       "via": "related",
@@ -36,6 +33,9 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "websiteDescription": {
+      "type": "richtext"
     }
   }
 }

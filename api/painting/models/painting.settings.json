@@ -36,8 +36,9 @@
     "price": {
       "type": "decimal"
     },
-    "Pinned": {
-      "type": "boolean"
+    "pinned": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

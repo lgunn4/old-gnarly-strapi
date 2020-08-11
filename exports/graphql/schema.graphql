@@ -3,9 +3,9 @@ type Configuration {
   created_at: DateTime!
   updated_at: DateTime!
   websiteName: String
-  websiteDescription: String
   profilePicture: UploadFile
   websiteLogo: UploadFile
+  websiteDescription: String
 }
 
 type ConfigurationAggregator {
@@ -59,16 +59,16 @@ type ConfigurationGroupBy {
   created_at: [ConfigurationConnectionCreated_at]
   updated_at: [ConfigurationConnectionUpdated_at]
   websiteName: [ConfigurationConnectionWebsiteName]
-  websiteDescription: [ConfigurationConnectionWebsiteDescription]
   profilePicture: [ConfigurationConnectionProfilePicture]
   websiteLogo: [ConfigurationConnectionWebsiteLogo]
+  websiteDescription: [ConfigurationConnectionWebsiteDescription]
 }
 
 input ConfigurationInput {
   websiteName: String
-  websiteDescription: String
   profilePicture: ID
   websiteLogo: ID
+  websiteDescription: String
 }
 
 input createConfigurationInput {
@@ -151,9 +151,9 @@ type deleteUserPayload {
 
 input editConfigurationInput {
   websiteName: String
-  websiteDescription: String
   profilePicture: ID
   websiteLogo: ID
+  websiteDescription: String
 }
 
 input editFileInput {
@@ -181,7 +181,7 @@ input editPaintingInput {
   sold: Boolean
   photo: [ID]
   price: Float
-  Pinned: Boolean
+  pinned: Boolean
 }
 
 input editRoleInput {
@@ -233,7 +233,7 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Configuration | ConfigurationConnection | ConfigurationAggregator | ConfigurationGroupBy | ConfigurationConnectionId | ConfigurationConnectionCreated_at | ConfigurationConnectionUpdated_at | ConfigurationConnectionWebsiteName | ConfigurationConnectionWebsiteDescription | ConfigurationConnectionProfilePicture | ConfigurationConnectionWebsiteLogo | createConfigurationPayload | updateConfigurationPayload | deleteConfigurationPayload | Painting | PaintingConnection | PaintingAggregator | PaintingAggregatorSum | PaintingAggregatorAvg | PaintingAggregatorMin | PaintingAggregatorMax | PaintingGroupBy | PaintingConnectionId | PaintingConnectionCreated_at | PaintingConnectionUpdated_at | PaintingConnectionTitle | PaintingConnectionDescription | PaintingConnectionPublished | PaintingConnectionSold | PaintingConnectionPrice | PaintingConnectionPinned | createPaintingPayload | updatePaintingPayload | deletePaintingPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Configuration | ConfigurationConnection | ConfigurationAggregator | ConfigurationGroupBy | ConfigurationConnectionId | ConfigurationConnectionCreated_at | ConfigurationConnectionUpdated_at | ConfigurationConnectionWebsiteName | ConfigurationConnectionProfilePicture | ConfigurationConnectionWebsiteLogo | ConfigurationConnectionWebsiteDescription | createConfigurationPayload | updateConfigurationPayload | deleteConfigurationPayload | Painting | PaintingConnection | PaintingAggregator | PaintingAggregatorSum | PaintingAggregatorAvg | PaintingAggregatorMin | PaintingAggregatorMax | PaintingGroupBy | PaintingConnectionId | PaintingConnectionCreated_at | PaintingConnectionUpdated_at | PaintingConnectionTitle | PaintingConnectionDescription | PaintingConnectionPublished | PaintingConnectionSold | PaintingConnectionPrice | PaintingConnectionPinned | createPaintingPayload | updatePaintingPayload | deletePaintingPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
   createConfiguration(input: createConfigurationInput): createConfigurationPayload
@@ -278,7 +278,7 @@ type Painting {
   published: Date
   sold: Boolean
   price: Float
-  Pinned: Boolean
+  pinned: Boolean
   photo(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
 }
 
@@ -367,7 +367,7 @@ type PaintingGroupBy {
   published: [PaintingConnectionPublished]
   sold: [PaintingConnectionSold]
   price: [PaintingConnectionPrice]
-  Pinned: [PaintingConnectionPinned]
+  pinned: [PaintingConnectionPinned]
 }
 
 input PaintingInput {
@@ -377,7 +377,7 @@ input PaintingInput {
   sold: Boolean
   photo: [ID]
   price: Float
-  Pinned: Boolean
+  pinned: Boolean
 }
 
 type Query {
