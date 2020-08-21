@@ -39,6 +39,11 @@
     "pinned": {
       "type": "boolean",
       "default": false
+    },
+    "sold_date": {
+      "type": "date",
+      "private": false,
+      "required": false
     }
   }
 }
